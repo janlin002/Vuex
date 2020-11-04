@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container main-content mb-3">
-      <Loading :active.sync="isLoading"></Loading>
+      <!-- <Loading :active.sync="isLoading"></Loading> -->
       <div class="row">
         <div class="col-md-3">
           <!-- 左側選單 (List group) -->
@@ -48,7 +48,7 @@
               <!-- 禮品 -->
               <div class="col-md-4 mb-4" v-for="(item) in filterData" :key="item.id">
                 <div class="card border-0 box-shadow text-center h-100">
-                  <img class="card-img-top" :src="item.image" alt="Card image cap">
+                  <img class="card-img-top" :src="item.imageUrl" alt="Card image cap">
                   <div class="card-body">
                     <h4 class="card-title">{{ item.title }}</h4>
                     <p class="card-text text-left">{{ item.content }}</p>
@@ -77,7 +77,7 @@ export default {
       products: [],
       searchText: '',
       categories: [],
-      isLoading: false,
+      // isLoading: false,
     };
   },
   computed: {
@@ -96,12 +96,12 @@ export default {
     getProducts() {
       const vm = this;
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.get(url).then((response) => {
         vm.products = response.data.products;
         console.log('取得產品列表:', response);
         vm.getUnique();
-        vm.isLoading = false;
+         vm.$store.state.isLoading = false;
       });
     },
     addtoCart(id, qty = 1) {

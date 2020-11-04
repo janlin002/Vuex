@@ -9,6 +9,7 @@ import 'vue-loading-overlay/dist/vue-loading.min.css';
 import 'bootstrap';
 import App from './App';
 import router from './router';
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
@@ -18,6 +19,7 @@ Vue.use(Vuex);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
 });
